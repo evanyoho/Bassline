@@ -1,0 +1,34 @@
+
+
+// generate notes
+  int rand_a; // debugging
+  for (int i = 0; i < debugLength; i++) {  // for debugging, notes should be read from text file
+    rand_a = (int)random(totalSteps);
+    
+    // generate first note
+    if(notes.length == 0) { 
+      // Note(int x, int y, int size, int pColor, int pAlpha)
+      note = new Note(startPos, borderHeight + rand_a*stepDist, 0, pColor, pAlpha);
+    } else {
+      note = new Note(notes[i-1].x + (int)random(40,140), borderHeight + rand_a*stepDist, 0, pColor, pAlpha);
+    }
+
+    notes = (Note[])append(notes, note);
+  }
+  generateSizes(notes);
+  
+  
+  
+// for debugging, POC
+void generateSizes(Note[] notes) {
+  int size;
+  int dist;
+  for(int i = 0; i < notes.length; i++) {
+     if(i != notes.length-1) {
+       dist = notes[i].x - notes[i+1].x;
+       notes[i].size = dist/3*2;
+     } else {
+       notes[i].size = notes[i-1].size;
+     }
+  }
+}
